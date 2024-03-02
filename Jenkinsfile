@@ -5,18 +5,18 @@ pipeline {
             steps {
                 echo 'Running build automation'
                 sh './gradlew build --no-daemon'
-                archiveArtifacts artifacts: 'dist/trainSchedule.zip'
+                archiveArtifacts artifacts: 'dist/my_website.zip'
             }
         }
         stage('Build Docker Image') {
             when {
-                branch 'master'
+                branch 'main'
             }
             steps {
                 script {
-                    def app = docker.build("davidgnamus/train-schedule")
+                    def app = docker.build("davidgnamus/my_website")
                     app.inside {
-                        sh 'echo $(curl http://localhost:8080)'
+                        sh 'echo $(curl localhost:8080)'
                     }
                 }
             }
