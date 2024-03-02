@@ -16,7 +16,7 @@ pipeline {
                 script {
                     def app = docker.build("davidgnamus/my_website")
                     app.inside {
-                        sh 'echo $(curl localhost:8080)'
+                        sh 'echo $(curl http://34.244.27.22:8080)'
                     }
                 }
             }
